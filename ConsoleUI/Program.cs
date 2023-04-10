@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -10,20 +11,121 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            //CarTestCRUD();
 
-            List<Car> cars = carManager.GetAll();
+            BrandTestCRUD();
 
-            foreach (var car in cars)
+            Console.ReadLine();
+
+        }
+
+        private static void CarTestCRUD()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            Console.WriteLine("CREATE CAR");
+            carManager.Add(new Car()
             {
-                Console.WriteLine(car.Description);
+                Name = "C63 AMG",
+                DailyPrice = 50000,
+                Description = "Nice Car",
+                ModelYear = 2020
+            });
+
+            Console.WriteLine("READ CARS");
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine(car.Name);
             }
 
-            Console.WriteLine("Getting car by id: ");
-            Console.WriteLine(carManager.GetById(1).Description);
+            Console.WriteLine("UPDATE CAR");
+            Car updatedCar = new Car()
+            {
+                Id = 2,
+                Name = "C63 AMG",
+                DailyPrice = 70000,
+                Description = "Updated",
+                ModelYear = 2021
+            };
+            carManager.Update(updatedCar);
 
-            Console.ReadLine(); 
 
+            Console.WriteLine("DELETE CAR");
+            Car deletedCar = new Car()
+            {
+                Id = 2,
+                Name = "C63 AMG",
+                DailyPrice = 70000,
+                Description = "Updated",
+                ModelYear = 2021
+            };
+            Console.WriteLine($"Deleting Car: {deletedCar.Name}");
+            carManager.Delete(deletedCar);
+
+            Console.WriteLine("READ CARS");
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine(car.Name);
+            }
+        }
+
+
+        private static void BrandTestCRUD()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            Console.WriteLine("CREATE BRAND");
+            brandManager.Add(new Brand()
+            {
+                Id = 1,
+                Name = "BMW"
+            }); ;
+
+            Console.WriteLine("READ BRANDS");
+            if (brandManager.GetAll().Count > 0)
+            {
+                foreach (var brand in brandManager.GetAll())
+                {
+                    Console.WriteLine(brand.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Brands");
+            }
+
+
+            Console.WriteLine("UPDATE BRAND");
+            Brand updatedBrand = new Brand()
+            {
+                Id = 1,
+                Name = "MERCEDES"
+
+            };
+            brandManager.Update(updatedBrand);
+
+
+            Console.WriteLine("DELETE BRAND");
+            Brand deletedBrand = new Brand()
+            {
+                Id = 1,
+                Name = "MERCEDES"
+            };
+            Console.WriteLine($"Deleting Brand: {deletedBrand.Name}");
+            brandManager.Delete(deletedBrand);
+
+            Console.WriteLine("READ CARS");
+            if (brandManager.GetAll().Count > 0)
+            {
+                foreach (var brand in brandManager.GetAll())
+                {
+                    Console.WriteLine(brand.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Brands");
+            }
         }
     }
 }
