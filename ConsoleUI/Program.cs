@@ -11,9 +11,9 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTestCRUD();
+            CarTestCRUD();
 
-            BrandTestCRUD();
+            //BrandTestCRUD();
 
             Console.ReadLine();
 
@@ -23,50 +23,55 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            Console.WriteLine("CREATE CAR");
-            carManager.Add(new Car()
-            {
-                Name = "C63 AMG",
-                DailyPrice = 50000,
-                Description = "Nice Car",
-                ModelYear = 2020
-            });
+            //Console.WriteLine("CREATE CAR");
+            //carManager.Add(new Car()
+            //{
+            //    Name = "C63 AMG",
+            //    DailyPrice = 50000,
+            //    Description = "Nice Car",
+            //    ModelYear = 2020
+            //});
 
-            Console.WriteLine("READ CARS");
-            foreach (var car in carManager.GetAll())
+            Console.WriteLine("Reading Car Details");
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Name);
+                Console.WriteLine("-------------");
+                Console.WriteLine(car.CarName);
+                Console.WriteLine(car.ColorName);
+                Console.WriteLine(car.BrandName);
+                Console.WriteLine(car.DailyPrice);
+                Console.WriteLine("-------------");
             }
 
-            Console.WriteLine("UPDATE CAR");
-            Car updatedCar = new Car()
-            {
-                Id = 2,
-                Name = "C63 AMG",
-                DailyPrice = 70000,
-                Description = "Updated",
-                ModelYear = 2021
-            };
-            carManager.Update(updatedCar);
+            //Console.WriteLine("UPDATE CAR");
+            //Car updatedCar = new Car()
+            //{
+            //    Id = 2,
+            //    Name = "C63 AMG",
+            //    DailyPrice = 70000,
+            //    Description = "Updated",
+            //    ModelYear = 2021
+            //};
+            //carManager.Update(updatedCar);
 
 
-            Console.WriteLine("DELETE CAR");
-            Car deletedCar = new Car()
-            {
-                Id = 2,
-                Name = "C63 AMG",
-                DailyPrice = 70000,
-                Description = "Updated",
-                ModelYear = 2021
-            };
-            Console.WriteLine($"Deleting Car: {deletedCar.Name}");
-            carManager.Delete(deletedCar);
+            //Console.WriteLine("DELETE CAR");
+            //Car deletedCar = new Car()
+            //{
+            //    Id = 2,
+            //    Name = "C63 AMG",
+            //    DailyPrice = 70000,
+            //    Description = "Updated",
+            //    ModelYear = 2021
+            //};
+            //Console.WriteLine($"Deleting Car: {deletedCar.Name}");
+            //carManager.Delete(deletedCar);
 
-            Console.WriteLine("READ CARS");
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.Name);
-            }
+            //Console.WriteLine("READ CARS");
+            //foreach (var car in carManager.GetAll())
+            //{
+            //    Console.WriteLine(car.Name);
+            //}
         }
 
 
@@ -103,7 +108,7 @@ namespace ConsoleUI
 
             };
             brandManager.Update(updatedBrand);
-
+ 
 
             Console.WriteLine("DELETE BRAND");
             Brand deletedBrand = new Brand()
