@@ -19,6 +19,12 @@ namespace ConsoleUI
 
         }
 
+        private static void UserTestCRUD()
+        {
+
+        }
+
+
         private static void CarTestCRUD()
         {
             CarManager carManager = new CarManager(new EfCarDal());
@@ -33,7 +39,7 @@ namespace ConsoleUI
             //});
 
             Console.WriteLine("Reading Car Details");
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine("-------------");
                 Console.WriteLine(car.CarName);
@@ -74,7 +80,6 @@ namespace ConsoleUI
             //}
         }
 
-
         private static void BrandTestCRUD()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
@@ -87,9 +92,9 @@ namespace ConsoleUI
             }); ;
 
             Console.WriteLine("READ BRANDS");
-            if (brandManager.GetAll().Count > 0)
+            if (brandManager.GetAll().Data.Count > 0)
             {
-                foreach (var brand in brandManager.GetAll())
+                foreach (var brand in brandManager.GetAll().Data)
                 {
                     Console.WriteLine(brand.Name);
                 }
@@ -108,7 +113,7 @@ namespace ConsoleUI
 
             };
             brandManager.Update(updatedBrand);
- 
+
 
             Console.WriteLine("DELETE BRAND");
             Brand deletedBrand = new Brand()
@@ -120,9 +125,9 @@ namespace ConsoleUI
             brandManager.Delete(deletedBrand);
 
             Console.WriteLine("READ CARS");
-            if (brandManager.GetAll().Count > 0)
+            if (brandManager.GetAll().Data.Count > 0)
             {
-                foreach (var brand in brandManager.GetAll())
+                foreach (var brand in brandManager.GetAll().Data)
                 {
                     Console.WriteLine(brand.Name);
                 }

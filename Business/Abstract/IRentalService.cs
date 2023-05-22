@@ -1,5 +1,4 @@
-﻿using Core.Utilities.Results;
-using Entities.Concrete;
+﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IBrandService : IEntityService<Brand>
+    public interface IRentalService : IEntityService<Rental>
     {
     }
 }
