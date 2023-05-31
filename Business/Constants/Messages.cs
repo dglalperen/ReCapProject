@@ -21,6 +21,8 @@ namespace Business.Constants
         public static string BrandDeleted = "Brand deleted";
         public static string BrandListed = "Brand listed";
         public static string BrandsListed = "Brands listed";
+        public static string BrandAlreadyExistsError = "Brand already exists";
+
 
         public static string UserAdded = "User added";
         public static string UserUpdated = "User updated";

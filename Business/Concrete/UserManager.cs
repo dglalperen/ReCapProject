@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -21,14 +23,9 @@ namespace Business.Concrete
             _userDal = carDal;
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
-            if (_userDal.Get(u => u.Id == user.Id) != null)
-            {
-                return new ErrorResult(Messages.UserAlreadyExistsError);
-
-            }
-
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
 
